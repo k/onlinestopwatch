@@ -4,12 +4,14 @@
 	let time = 0.0;
 	let interval;
 	let startTime;
+	let endTime;
 
 	function start() {
 		if (interval != null) {
 			stop();
 		} else {
 			if (!startTime) startTime = Date.now();
+			if (endTime) startTime += Date.now() - endTime;
 			interval = setInterval(() => {
 				time = (Date.now() - startTime)
 			}, 10)
@@ -17,6 +19,7 @@
 	}
 
 	function stop() {
+		endTime = Date.now();
 		clearInterval(interval)
 		interval = undefined
 	}
@@ -25,6 +28,7 @@
 		stop();
 		time = 0.0;
 		startTime = null;
+		endTime = null;
 	}
 </script>
 
